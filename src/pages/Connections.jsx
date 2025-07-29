@@ -17,7 +17,7 @@ const Connections = () => {
       dispatch(addConnections(res.data.data));
       // console.log(res.data.data);
     } catch (err) {
-      //
+      console.error(err);
     }
   };
   useEffect(() => {
@@ -25,7 +25,7 @@ const Connections = () => {
   }, []);
   if (!connectionData) return;
 
-  if (connectionData === 0) return <div>No Connection Found</div>;
+  if (connectionData.length === 0) return <div>No Connection Found</div>;
   return (
     <div className="p-5">
       <UsersList data={connectionData} />

@@ -12,7 +12,6 @@ const App = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const userData = useSelector((store) => store.user?.user);
-
   const fetchUser = async () => {
     if(userData) return;
     try {
@@ -21,7 +20,7 @@ const App = () => {
       });
       dispatch(addUser(res.data));
     } catch (err) {
-      if (err.status === 401) navigate("/login");
+      if (err.response?.status === 401) navigate("/login");
       console.error(err);
     }
   };
@@ -30,7 +29,7 @@ const App = () => {
     if (!userData) {
       fetchUser();
     }
-  }, []);
+  }, [userData]);
 
   return (
     <>

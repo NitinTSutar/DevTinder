@@ -14,7 +14,8 @@ const Login = () => {
 
   const handleLogin = async () => {
     try {
-      const res = await axios.post(
+      // 1. Login API call
+      await axios.post(
         BASE_URL + "/login",
         {
           email,
@@ -22,6 +23,12 @@ const Login = () => {
         },
         { withCredentials: true }
       );
+
+      // 2. Fetch full user profile
+      const res = await axios.get(BASE_URL + "/profile/view", {
+        withCredentials: true,
+      });
+
       dispatch(addUser(res.data));
       navigate("/");
     } catch (err) {

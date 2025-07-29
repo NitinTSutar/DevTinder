@@ -7,6 +7,8 @@ import Profile from "./pages/Profile.jsx";
 import { store } from "./utils/store.js";
 import { Provider } from "react-redux";
 import Feed from "./pages/Feed.jsx";
+import Connections from "./pages/Connections.jsx";
+import Requests from "./pages/Requests.jsx";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
@@ -17,6 +19,8 @@ createRoot(document.getElementById("root")).render(
             <Route path="/" element={<Feed />} />
             <Route path="/login" element={<Login />} />
             <Route path="/profile" element={<Profile />} />
+            <Route path="/connections" element={<Connections />} />
+            <Route path="/request" element={<Requests />} />
           </Route>
         </Routes>
       </BrowserRouter>

@@ -8,6 +8,7 @@ import UsersList from "../components/UsersList";
 const Connections = () => {
   const connectionData = useSelector((store) => store.connection);
   const dispatch = useDispatch();
+  
 
   const handleConnections = async () => {
     try {
@@ -15,7 +16,7 @@ const Connections = () => {
         withCredentials: true,
       });
       dispatch(addConnections(res.data.data));
-      // console.log(res.data.data);
+      console.log(res.data.data);
     } catch (err) {
       console.error(err);
     }
@@ -27,8 +28,8 @@ const Connections = () => {
 
   if (connectionData.length === 0) return <div>No Connection Found</div>;
   return (
-    <div className="p-5">
-      <UsersList data={connectionData} />
+    <div className="p-2 md:p-5">
+      <UsersList userData={connectionData} fromRequests={true}/>
     </div>
   );
 };

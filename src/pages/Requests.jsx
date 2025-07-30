@@ -26,11 +26,9 @@ const Requests = () => {
   if (!requests) return;
   if (requests.length === 0) return <div>No Requests Found</div>;
 
-  const fromUsers = requests.map((request) => request.fromUserId);
-  console.log(fromUsers);
   return (
-    <div>
-      <UsersList data={fromUsers} />
+    <div className="p-2 md:p-5">
+      <UsersList userData={requests} fromRequests={false}/>
     </div>
   );
 };

@@ -99,10 +99,10 @@ const EditProfile = (user) => {
             <label className="label">Skills</label>
             <input
               type="text"
-              value={skills}
+              value={skills?.join(" ")||""}
               className="input"
               placeholder="Skills"
-              onChange={(e) => setSkills(e.target.value)}
+              onChange={(e) => setSkills(e.target.value.split(" ,"))}
             />
             {error && (
               <div className="text-red-500 text-sm mt-2 mb-2">{error}</div>

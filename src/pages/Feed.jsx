@@ -10,7 +10,7 @@ const Feed = () => {
   const dispatch = useDispatch();
 
   const getFeed = async () => {
-    if (feed) return;
+    if (feed) return <div>No Data!</div>;
     try {
       const res = await axios.get(BASE_URL + "/feed", {
         withCredentials: true,
@@ -24,7 +24,6 @@ const Feed = () => {
   useEffect(() => {
     getFeed();
   }, [feed]);
-
   return (
     feed && (
       <div className="flex justify-center mt-10">

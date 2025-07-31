@@ -24,7 +24,7 @@ const Requests = () => {
     fetchRequests();
   },[]);
   if (!requests) return;
-  if (requests.length === 0) return <div>No Requests Found</div>;
+  if (requests.length === 0) return <div className="flex justify-center">No Requests Found</div>;
 
   return (
     <div className="p-2 md:p-5">

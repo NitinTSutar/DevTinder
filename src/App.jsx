@@ -32,11 +32,11 @@ const App = () => {
   }, []);
 
   return (
-    <>
+    <div className="flex h-dvh flex-col justify-between ">
       <Navbar />
       <Outlet />
       <Footer />
-    </>
+    </div>
   );
 };
 

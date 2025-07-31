@@ -25,7 +25,7 @@ const UserCard = ({ user, feed }) => {
 
   return (
     <div className="card bg-base-200 w-96 shadow-sm">
-      <figure className="px-10 pt-10">
+      <figure className="px-5 pt-5">
         <img src={photoUrl} alt="Shoes" className="rounded-xl" />
       </figure>
       <div className="card-body items-center text-center">

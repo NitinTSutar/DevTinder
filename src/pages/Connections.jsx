@@ -26,7 +26,7 @@ const Connections = () => {
   }, []);
   if (!connectionData) return;
 
-  if (connectionData.length === 0) return <div>No Connection Found</div>;
+  if (connectionData.length === 0) return <div className="flex justify-center">No Connection Found</div>;
   return (
     <div className="p-2 md:p-5">
       <UsersList userData={connectionData} fromRequests={true}/>

@@ -43,7 +43,7 @@ const UserCard = ({ user, feed }) => {
           <div className="card-actions">
             <button
               className="btn btn-outline btn-secondary"
-              onClick={() => handleSendRequest("ignore", _id)}
+              onClick={() => handleSendRequest("ignored", _id)}
             >
               Ignore
             </button>

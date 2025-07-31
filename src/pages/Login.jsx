@@ -6,15 +6,17 @@ import { useNavigate } from "react-router";
 import { BASE_URL } from "../utils/constants";
 
 const Login = () => {
-  const [email, setEmailId] = useState("vivek@gmail.com");
-  const [password, setPassword] = useState("Vivek@123");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [email, setEmailId] = useState("");
+  const [password, setPassword] = useState("");
+  const [isLogin, setIsLogin] = useState(true);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [error, setError] = useState("");
 
   const handleLogin = async () => {
     try {
-      // 1. Login API call
       await axios.post(
         BASE_URL + "/login",
         {
@@ -23,14 +25,37 @@ const Login = () => {
         },
         { withCredentials: true }
       );
+      // console.log(res.data.data);
 
-      // 2. Fetch full user profile
       const res = await axios.get(BASE_URL + "/profile/view", {
         withCredentials: true,
       });
-
       dispatch(addUser(res.data));
       navigate("/");
+    } catch (err) {
+      setError(err?.response?.data?.message || "Something went wrong");
+    }
+  };
+  const handleSignIn = async () => {
+    try {
+      await axios.post(
+        BASE_URL + "/signup",
+        {
+          firstName,
+          lastName,
+          email,
+          password,
+        },
+        {
+          withCredentials: true,
+        }
+      );
+
+      const res = await axios.get(BASE_URL + "/profile/view", {
+        withCredentials: true,
+      });
+      dispatch(addUser(res.data));
+      return navigate("/profile");
     } catch (err) {
       setError(err?.response?.data?.message || "Something went wrong");
     }
@@ -38,7 +63,31 @@ const Login = () => {
 
   return (
     <fieldset className="fieldset bg-base-200 border-base-300 rounded-box w-xs border p-4">
-      <legend className="fieldset-legend">Login</legend>
+      <legend className="fieldset-legend text-sm sm:text-lg md:text-xl ">
+        {isLogin ? "Login" : "Signup"}
+      </legend>
+
+      {!isLogin && (
+        <>
+          <label className="label">First Name</label>
+          <input
+            type="text"
+            className="input"
+            placeholder="First Name"
+            value={firstName}
+            onChange={(e) => setFirstName(e.target.value)}
+          />
+
+          <label className="label">Last Name</label>
+          <input
+            type="text"
+            className="input"
+            placeholder="Last Name"
+            value={lastName}
+            onChange={(e) => setLastName(e.target.value)}
+          />
+        </>
+      )}
 
       <label className="label">Email</label>
       <input
@@ -58,9 +107,19 @@ const Login = () => {
         onChange={(e) => setPassword(e.target.value)}
       />
       <p className="text-red-500">{error}</p>
-      <button className="btn btn-neutral mt-4" onClick={handleLogin}>
-        Login
+      <button
+        className="btn btn-neutral mt-4"
+        onClick={isLogin ? handleLogin : handleSignIn}
+      >
+        {isLogin ? "Login" : "Signup"}
       </button>
+      <label
+        htmlFor="lable"
+        className="cursor-pointer mt-4 text-center"
+        onClick={() => setIsLogin(!isLogin)}
+      >
+        {isLogin ? "New User? Sign-Up" : "Already have an Account? Sign-In"}
+      </label>
     </fieldset>
   );
 };

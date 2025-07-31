@@ -29,7 +29,7 @@ const App = () => {
     if (!userData) {
       fetchUser();
     }
-  }, [userData]);
+  }, []);
 
   return (
     <>
